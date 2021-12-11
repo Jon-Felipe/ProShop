@@ -4,7 +4,7 @@ import { Row, Col, Image, ListGroup, Card, Button } from "react-bootstrap";
 import Rating from "../components/Rating";
 import axios from "axios";
 
-const ProductScreen = ({ match }) => {
+const ProductScreen = () => {
   const params = useParams();
 
   const [product, setProduct] = useState({});
@@ -15,7 +15,7 @@ const ProductScreen = ({ match }) => {
       setProduct(data);
     };
     fetchProduct();
-  }, []);
+  }, [params]);
 
   const { image, name, rating, numReviews, price, description, countInStock } =
     product;
