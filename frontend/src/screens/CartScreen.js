@@ -23,8 +23,6 @@ const CartScreen = () => {
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
 
-  console.log(cartItems);
-
   const productId = params.id;
   const qty = location.search ? Number(location.search.split("=")[1]) : 1;
 
