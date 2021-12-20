@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, useParams, useNavigate, useLocation } from "react-router-dom";
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useParams, useNavigate, useLocation } from 'react-router-dom';
 import {
   Row,
   Col,
@@ -9,10 +9,10 @@ import {
   Form,
   Button,
   Card,
-} from "react-bootstrap";
-import { addToCart, removeFromCart } from "../actions/cartActions";
+} from 'react-bootstrap';
+import { addToCart, removeFromCart } from '../actions/cartActions';
 
-import Message from "../components/Message";
+import Message from '../components/Message';
 
 const CartScreen = () => {
   const params = useParams();
@@ -24,7 +24,7 @@ const CartScreen = () => {
   const { cartItems } = cart;
 
   const productId = params.id;
-  const qty = location.search ? Number(location.search.split("=")[1]) : 1;
+  const qty = location.search ? Number(location.search.split('=')[1]) : 1;
 
   useEffect(() => {
     if (productId) {
@@ -37,7 +37,7 @@ const CartScreen = () => {
   };
 
   const checkoutHandler = () => {
-    navigate("/login?redirect=shipping");
+    navigate('/login?redirect=/shipping');
   };
 
   return (
@@ -46,10 +46,10 @@ const CartScreen = () => {
         <h1>Shopping Cart</h1>
         {cartItems.length === 0 ? (
           <Message>
-            Your cart is empty <Link to="/">Go Back</Link>
+            Your cart is empty <Link to='/'>Go Back</Link>
           </Message>
         ) : (
-          <ListGroup variant="flush">
+          <ListGroup variant='flush'>
             {cartItems.map((item) => {
               const { product, image, name, price, qty, countInStock } = item;
               return (
@@ -64,7 +64,7 @@ const CartScreen = () => {
                     <Col md={2}>${price}</Col>
                     <Col md={2}>
                       <Form.Control
-                        as="select"
+                        as='select'
                         value={qty}
                         onChange={(e) =>
                           dispatch(addToCart(product, Number(e.target.value)))
@@ -79,11 +79,11 @@ const CartScreen = () => {
                     </Col>
                     <Col md={2}>
                       <Button
-                        type="button"
-                        variant="light"
+                        type='button'
+                        variant='light'
                         onClick={() => removeFromCartHandler(product)}
                       >
-                        <i className="fas fa-trash"></i>
+                        <i className='fas fa-trash'></i>
                       </Button>
                     </Col>
                   </Row>
@@ -95,7 +95,7 @@ const CartScreen = () => {
       </Col>
       <Col md={4}>
         <Card>
-          <ListGroup variant="flush">
+          <ListGroup variant='flush'>
             <ListGroup.Item>
               <h2>
                 Subtotal ({cartItems.reduce((acc, item) => acc + item.qty, 0)})
@@ -108,8 +108,8 @@ const CartScreen = () => {
             </ListGroup.Item>
             <ListGroup.Item>
               <Button
-                type="button"
-                className="w-100"
+                type='button'
+                className='w-100'
                 disabled={cartItems.length === 0}
                 onClick={checkoutHandler}
               >
