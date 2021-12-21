@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate, useParams, Link } from 'react-router-dom';
-import { Button, Row, Col, ListGroup, Image, Card } from 'react-bootstrap';
+import React, { useEffect } from 'react';
+import { useParams, Link } from 'react-router-dom';
+import { Row, Col, ListGroup, Image, Card } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { getOrderDetails } from '../actions/orderActions';
 
@@ -10,7 +10,6 @@ import Loader from '../components/Loader';
 
 const OrderScreen = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const params = useParams();
 
   const orderId = params.id;
@@ -32,7 +31,7 @@ const OrderScreen = () => {
     if (!order || order._id !== orderId) {
       dispatch(getOrderDetails(orderId));
     }
-  }, [order, orderId]);
+  }, [order, orderId, dispatch]);
 
   return loading ? (
     <Loader />
