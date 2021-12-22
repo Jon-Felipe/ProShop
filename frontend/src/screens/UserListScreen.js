@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Table, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { listUsers } from '../actions/userActions';
+import { listUsers, deleteUser } from '../actions/userActions';
 
 // components
 import Message from '../components/Message';
@@ -17,8 +17,14 @@ const UserListScreen = () => {
   const { loading, error, users } = userList;
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
+  const userDelete = useSelector((state) => state.userDelete);
+  const { success: successDelete } = userDelete;
 
-  const deleteHandler = (id) => {};
+  const deleteHandler = (id) => {
+    if (window.confirm('Are you sure')) {
+      dispatch(deleteUser(id));
+    }
+  };
 
   useEffect(() => {
     if (userInfo && userInfo.isAdmin) {
@@ -26,7 +32,7 @@ const UserListScreen = () => {
     } else {
       navigate('/login');
     }
-  }, [dispatch, navigate]);
+  }, [dispatch, navigate, successDelete]);
 
   return (
     <>
